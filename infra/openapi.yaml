@@ -1,0 +1,41 @@
+swagger: "2.0"
+info:
+  title: "Star Wars Explorer API - PowerOfData Challenge"
+  description: "API Gateway para consulta unificada de personagens, planetas e naves da saga Star Wars."
+  version: "1.0.0"
+
+schemes:
+  - "https"
+
+paths:
+  /explore:
+    get:
+      summary: "Consulta dados da saga Star Wars"
+      description: "Retorna informações detalhadas baseadas no recurso e filtro fornecidos."
+      operationId: "getStarWarsData"
+      
+      x-google-backend:
+        address: "https://desafio-5060442206.europe-west1.run.app"
+        deadline: 20.0 # Tempo limite para a SWAPI responder
+      
+      parameters:
+        - name: "resource"
+          in: "query"
+          required: true
+          type: "string"
+          enum: [people, planets, starships, films, species, vehicles]
+          description: "O tipo de informação que você deseja buscar."
+        
+        - name: "search"
+          in: "query"
+          required: false
+          type: "string"
+          description: "Termo de busca para filtrar resultados específicos (ex: nome do personagem)."
+
+      responses:
+        200:
+          description: "Dados recuperados com sucesso."
+        400:
+          description: "Erro na requisição: Recurso inválido ou parâmetro ausente."
+        502:
+          description: "Erro de Bad Gateway: A API externa (SWAPI) falhou ou demorou a responder."

@@ -1,6 +1,10 @@
+import os
 import requests
 import functions_framework
 from flask import jsonify
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class StarWarsService:
     BASE_URL = "https://swapi.dev/api"
@@ -36,9 +40,10 @@ class StarWarsService:
 @functions_framework.http
 def hello_http(request):
     # 1. Autenticação
+    expected_api_key = os.getenv('API_KEY')
     api_key = request.headers.get('x-api-key')
-    if not api_key:
-        return jsonify({"error": "Autenticação necessária. Informe a x-api-key no header."}), 401
+    if not api_key or api_key != expected_api_key:
+        return jsonify({"error": "Autenticação necessária ou chave inválida."}), 401
 
     # 2. Captura de Parâmetros
     resource = request.args.get('resource', 'people')

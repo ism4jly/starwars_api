@@ -1,0 +1,47 @@
+# Python - Arquivos de cache e compilação
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testes e cobertura
+.pytest_cache/
+.test_results/
+.coverage
+htmlcov/
+
+# Ambientes Virtuais (VENV)
+venv/
+VENV/
+env.bak/
+venv.bak/
+
+# Configurações de IDE (VS Code, PyCharm)
+.vscode/
+.idea/
+
+# Arquivos de sistema e logs
+*.log
+.DS_Store
+Thumbs.db
+
+# Credenciais e Segredos (NUNCA suba arquivos .env ou .json de chaves)
+.env
+keys.json
+credentials.json
